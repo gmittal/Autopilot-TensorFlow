@@ -1,0 +1,7 @@
+*.pyc
+cv.py
+cv2.so
+logs/
+/input
+.floydexpt
+.floydignore
