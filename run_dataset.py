@@ -15,7 +15,7 @@ smoothed_angle = 0
 
 i = 0
 while(cv2.waitKey(10) != ord('q')):
-    full_image = scipy.misc.imread("driving_dataset/" + str(i) + ".jpg", mode="RGB")
+    full_image = scipy.misc.imread("data/" + str(i) + ".jpg", mode="RGB")
     image = scipy.misc.imresize(full_image[-150:], [66, 200]) / 255.0
     degrees = model.y.eval(feed_dict={model.x: [image], model.keep_prob: 1.0})[0][0] * 180.0 / scipy.pi
     call("clear")

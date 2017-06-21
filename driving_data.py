@@ -9,9 +9,9 @@ train_batch_pointer = 0
 val_batch_pointer = 0
 
 #read data.txt
-with open("input/data.txt") as f:
+with open("data/data.txt") as f:
     for line in f:
-        xs.append("input/" + line.split()[0])
+        xs.append("data/" + line.split()[0])
         #the paper by Nvidia uses the inverse of the turning radius,
         #but steering wheel angle is proportional to the inverse of turning radius
         #so the steering wheel angle in radians is used as the output
