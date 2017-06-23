@@ -2,7 +2,6 @@
 cv.py
 cv2.so
 logs/
-/input
 data/*
 .floydexpt
 .floydignore
