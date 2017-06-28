@@ -8,16 +8,16 @@ import pandas
 # Print the first one
 #print images[0]
 
-angle = "left_camera"
+angle = "center_camera"
 
 c_angle = []
 s_angle = []
 
-filename = "data_" + angle + ".txt"
+filename = "/data/autopilot/datasets/udacity-183G/data.txt"
 text_file = open(filename, "w")
 
 # Read a CSV file
-data = pandas.read_csv('/Users/NitaGanapathi/Desktop/udacity-40G-output/interpolated.csv')
+data = pandas.read_csv('/data/autopilot/datasets/udacity-183G/interpolated.csv')
 #print len(data["frame_id"])
 
 for i in range(0, len(data["frame_id"])):
