@@ -9,9 +9,9 @@ train_batch_pointer = 0
 val_batch_pointer = 0
 
 #read data.txt
-with open("datasets/udacity-40G/data.txt") as f:
+with open("datasets/udacity-183G/data.txt") as f:
     for line in f:
-        xs.append("datasets/udacity-40G/center/" + line.split()[0])
+        xs.append("datasets/udacity-183G/center/" + line.split()[0])
         #the paper by Nvidia uses the inverse of the turning radius,
         #but steering wheel angle is proportional to the inverse of turning radius
         #so the steering wheel angle in radians is used as the output
