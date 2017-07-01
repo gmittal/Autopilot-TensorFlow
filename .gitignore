@@ -6,4 +6,5 @@ data/*
 .floydexpt
 .floydignore
 venvd
-datasets
+datasets/*
+.DS_Store

@@ -1,24 +1,29 @@
-import os
-import pandas
+# Make Udacity datasets NVIDIA friendly
+import os, pandas, sys
 
-## Array of all the file names in the path
-#images = os.listdir('/Users/NitaGanapathi/Desktop/udacity-40G-output/center')
+PATH = sys.argv[1]
+IMAGE_VIEW = "center"
 
+angle = IMAGE_VIEW + "_camera"
+direction = IMAGE_VIEW
 
-# Print the first one
-#print images[0]
-
-angle = "center_camera"
+def rename(directory):
+    i = 0
+    for file_name in os.listdir(directory):
+        new_file_name = PATH + "/" + direction + "/" + str(i) + '.jpg'
+        old_file_name = PATH + "/" + direction + "/" + file_name
+        os.rename(old_file_name, new_file_name)
+        i += 1
+rename(os.path.abspath(PATH + "/" + direction))
 
 c_angle = []
 s_angle = []
 
-filename = "/data/autopilot/datasets/udacity-183G/data.txt"
+filename = PATH + "/data.txt"
 text_file = open(filename, "w")
 
 # Read a CSV file
-data = pandas.read_csv('/data/autopilot/datasets/udacity-183G/interpolated.csv')
-#print len(data["frame_id"])
+data = pandas.read_csv(PATH+'/interpolated.csv')
 
 for i in range(0, len(data["frame_id"])):
     c_angle.append(data["frame_id"][i])
@@ -30,20 +35,7 @@ j = 0
 for camera_angle in c_angle:
     if camera_angle == angle:
         text_file.write(str(i) + ".jpg" + ' ' + str(s_angle[j]) + '\n')
-        #print str(images[i]) + " " + str(s_angle[j]) + "\n"
         i += 1
     j += 1
 
-
 text_file.close()
-
-
-
-
-
-
-
-
-# Return the first row's timestamp and the first row's steering angle
-#print data["timestamp"][0]
-#print data["angle"][0]
