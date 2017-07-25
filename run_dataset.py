@@ -17,6 +17,9 @@ saver.restore(sess, "save/model.ckpt")
 img = cv2.imread('steering_wheel_image.jpg',0)
 rows,cols = img.shape
 
+angles = open("datasets/nvidia/data.txt").read().split('\n')[:-1]
+angles = map(lambda x: float(x.split(' ')[1]) * 180.0 / scipy.pi, angles)
+
 smoothed_angle = 0
 
 i = 0
@@ -27,6 +30,7 @@ while(cv2.waitKey(10) != ord('q')):
     degrees = model.y.eval(feed_dict={model.x: [image], model.keep_prob: 1.0})[0][0] * -360
     call("clear")
     print("Predicted steering angle: " + str(degrees) + " degrees")
+    print("Ground truth steering angle: " + str(angles[i]) + " degrees")
     cv2.imshow("frame", cv2.cvtColor(full_image, cv2.COLOR_RGB2BGR))
     #make smooth angle transitions by turning the steering wheel based on the difference of the current angle
     #and the predicted angle
