@@ -21,7 +21,6 @@ tf.summary.scalar("loss", loss)
 # merge all summaries into a single op
 merged_summary_op = tf.summary.merge_all()
 
-# saver = tf.train.Saver(write_version = saver_pb2.SaverDef.V1)
 saver = tf.train.Saver(write_version=tf.train.SaverDef.V2)
 
 # op to write logs to Tensorboard
