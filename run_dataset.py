@@ -4,6 +4,12 @@ import model
 import cv2
 from subprocess import call
 
+def crop_udacity(img,cropx,cropy, y_off, x_off):
+    y,x,z = img.shape
+    startx = x//2-(cropx//2)+x_off
+    starty = y//2-(cropy//2)+y_off
+    return img[starty:starty+cropy,startx:startx+cropx]
+
 sess = tf.InteractiveSession()
 saver = tf.train.Saver()
 saver.restore(sess, "save/model.ckpt")
@@ -15,8 +21,9 @@ smoothed_angle = 0
 
 i = 0
 while(cv2.waitKey(10) != ord('q')):
-    full_image = scipy.misc.imread("datasets/nvidia/" + str(i) + ".jpg", mode="RGB")
-    image = scipy.misc.imresize(full_image[190:400], [66, 200]) / 255.0
+    full_image = scipy.misc.imread("datasets/udacity-40G/center/" + str(i) + ".jpg", mode="RGB")
+    full_image = crop_udacity(full_image, 455, 256, 100, -30)
+    image = scipy.misc.imresize(full_image[-150:], [66, 200]) / 255.0
     degrees = model.y.eval(feed_dict={model.x: [image], model.keep_prob: 1.0})[0][0] * 180.0 / scipy.pi
     call("clear")
     print("Predicted steering angle: " + str(degrees) + " degrees")
