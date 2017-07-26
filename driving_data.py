@@ -9,10 +9,10 @@ train_batch_pointer = 0
 val_batch_pointer = 0
 
 #read data.txt
-with open("datasets/udacity-183G/data.txt") as f:
+with open("datasets/nvidia/data.txt") as f:
     for line in f:
-        xs.append("datasets/udacity-183G/center/" + line.split()[0])
-        ys.append(float(line.split()[1]))
+        xs.append("datasets/nvidia/" + line.split()[0])
+        ys.append(float(line.split()[1]) * scipy.pi / 180.0)
 
 #get number of images
 num_images = len(xs)
