@@ -25,9 +25,9 @@ smoothed_angle = 0
 i = 0
 while(cv2.waitKey(10) != ord('q')):
     full_image = scipy.misc.imread("datasets/udacity-40G/center/" + str(i) + ".jpg", mode="RGB")
-    full_image = crop_udacity(full_image, 455, 256, 50, -70)[-150:]
+    full_image = crop_udacity(full_image, 455, 256, 50, -70)
     image = scipy.misc.imresize(full_image, [66, 200]) / 255.0
-    degrees = -360 * angle[i]
+    degrees = -40 * angles[i]
     # degrees = model.y.eval(feed_dict={model.x: [image], model.keep_prob: 1.0})[0][0] * 180.0 / scipy.pi
     call("clear")
     print("Predicted steering angle: " + str(degrees) + " degrees")
