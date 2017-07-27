@@ -1,5 +1,15 @@
+import numpy as np
 import scipy.misc
 import random
+
+def angle_udacity(val):
+    norm = -4*np.arcsin(val)*180/np.pi
+    if np.isnan(norm):
+        diff = np.ceil(val) if val < 0 else np.floor(val)
+        start = -4*np.arcsin(val-diff)*180./np.pi
+        start += diff * -360.
+        return start
+    return norm
 
 xs = []
 ys = []
@@ -9,10 +19,10 @@ train_batch_pointer = 0
 val_batch_pointer = 0
 
 #read data.txt
-with open("datasets/nvidia/data.txt") as f:
+with open("datasets/udacity-40G/data.txt") as f:
     for line in f:
-        xs.append("datasets/nvidia/" + line.split()[0])
-        ys.append(float(line.split()[1]) * scipy.pi / 180.0)
+        xs.append("datasets/udacity-40G/" + line.split()[0])
+        ys.append(float(line.split()[1]))
 
 #get number of images
 num_images = len(xs)
@@ -43,7 +53,7 @@ def LoadTrainBatch(batch_size):
     y_out = []
     for i in range(0, batch_size):
         full_image = scipy.misc.imread(train_xs[(train_batch_pointer + i) % num_train_images])
-        # full_image = crop_udacity(full_image, 455, 256, 50, -70)
+        full_image = crop_udacity(full_image, 455, 256, 40, -70)
         x_out.append(scipy.misc.imresize(full_image[-150:], [66, 200]) / 255.0)
         y_out.append([train_ys[(train_batch_pointer + i) % num_train_images]])
     train_batch_pointer += batch_size
@@ -55,7 +65,7 @@ def LoadValBatch(batch_size):
     y_out = []
     for i in range(0, batch_size):
         full_image = scipy.misc.imread(val_xs[(val_batch_pointer + i) % num_val_images])
-        # full_image = crop_udacity(full_image, 455, 256, 50, -70)
+        full_image = crop_udacity(full_image, 455, 256, 40, -70)
         x_out.append(scipy.misc.imresize(full_image[-150:], [66, 200]) / 255.0)
         y_out.append([val_ys[(val_batch_pointer + i) % num_val_images]])
     val_batch_pointer += batch_size
