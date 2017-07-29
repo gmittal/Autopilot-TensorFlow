@@ -25,17 +25,18 @@ saver = tf.train.Saver()
 saver.restore(sess, "save/model.ckpt")
 
 img = cv2.imread('steering_wheel_image.jpg',0)
-angles = open("datasets/udacity-40G/data.txt").read().split('\n')[:-1]
-angles = map(lambda x: float(x.split(' ')[1]), angles)
+data = open("datasets/udacity-TEST/data.txt").read().split('\n')[:-1]
+angles = map(lambda x: float(x.split(' ')[1]), data)
+images = map(lambda x: x.split(' ')[0], data)
 
 rows,cols = img.shape
 
 smoothed_angle = 0
 
-i = 5000
+i = 3000
 while(cv2.waitKey(10) != ord('q')):
-    full_image = scipy.misc.imread("datasets/udacity-40G/center/" + str(i) + ".jpg", mode="RGB")
-    full_image = crop_udacity(full_image, 455, 256, 40, -70)[-150:]
+    full_image = scipy.misc.imread("datasets/udacity-TEST/" + images[i], mode="RGB")
+    full_image = crop_udacity(full_image, 455, 256, -20, -70)[-150:]
     image = scipy.misc.imresize(full_image, [66, 200]) / 255.0
 
     degrees = angle_udacity(angles[i])

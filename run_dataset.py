@@ -27,14 +27,16 @@ saver.restore(sess, "save/model.ckpt")
 img = cv2.imread('steering_wheel_image.jpg',0)
 rows,cols = img.shape
 
-angles = open("datasets/nvidia/data.txt").read().split('\n')[:-1]
-angles = map(lambda x: float(x.split(' ')[1]), angles)
+data = open("datasets/udacity-TEST/data.txt").read().split('\n')[:-1]
+angles = map(lambda x: float(x.split(' ')[1]), data)
+images = map(lambda x: x.split(' ')[0], data)
+
 
 smoothed_angle = 0
 
 i = 0
 while(cv2.waitKey(10) != ord('q')):
-    full_image = scipy.misc.imread("datasets/nvidia/" + str(i) + ".jpg", mode="RGB")
+    full_image = scipy.misc.imread("datasets/udacity-TEST/" + images[i], mode="RGB")
     image = scipy.misc.imresize(full_image[-150:], [66, 200]) / 255.0
     degrees = model.y.eval(feed_dict={model.x: [image], model.keep_prob: 1.0})[0][0] #* 180 / scipy.pi
     degrees = angle_udacity(degrees)

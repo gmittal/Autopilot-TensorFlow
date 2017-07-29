@@ -53,7 +53,7 @@ def LoadTrainBatch(batch_size):
     y_out = []
     for i in range(0, batch_size):
         full_image = scipy.misc.imread(train_xs[(train_batch_pointer + i) % num_train_images])
-        full_image = crop_udacity(full_image, 455, 256, 40, -70)
+        full_image = crop_udacity(full_image, 455, 256, -20, -70)
         x_out.append(scipy.misc.imresize(full_image[-150:], [66, 200]) / 255.0)
         y_out.append([train_ys[(train_batch_pointer + i) % num_train_images]])
     train_batch_pointer += batch_size
@@ -65,7 +65,7 @@ def LoadValBatch(batch_size):
     y_out = []
     for i in range(0, batch_size):
         full_image = scipy.misc.imread(val_xs[(val_batch_pointer + i) % num_val_images])
-        full_image = crop_udacity(full_image, 455, 256, 40, -70)
+        full_image = crop_udacity(full_image, 455, 256, -20, -70)
         x_out.append(scipy.misc.imresize(full_image[-150:], [66, 200]) / 255.0)
         y_out.append([val_ys[(val_batch_pointer + i) % num_val_images]])
     val_batch_pointer += batch_size
