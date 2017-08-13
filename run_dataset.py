@@ -47,8 +47,8 @@ while(cv2.waitKey(10) != ord('q')):
     cv2.imshow("frame", cv2.cvtColor(full_image, cv2.COLOR_RGB2BGR))
     #make smooth angle transitions by turning the steering wheel based on the difference of the current angle
     #and the predicted angle
-    diff = 0.2 * pow(abs((degrees - smoothed_angle)), 2.0 / 3.0) * (degrees - smoothed_angle) / abs(degrees - smoothed_angle)
-    smoothed_angle += diff
+    #diff = 0.2 * pow(abs((degrees - smoothed_angle)), 2.0 / 3.0) * (degrees - smoothed_angle) / abs(degrees - smoothed_angle)
+    smoothed_angle = degrees
     M = cv2.getRotationMatrix2D((cols/2,rows/2),-smoothed_angle,1)
     dst = cv2.warpAffine(img,M,(cols,rows))
     cv2.imshow("steering wheel", dst)
