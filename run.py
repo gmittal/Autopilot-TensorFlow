@@ -1,3 +1,5 @@
+# Try the model on real-time camera input from webcam
+
 import numpy as np
 import tensorflow as tf
 import scipy.misc

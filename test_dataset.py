@@ -1,3 +1,6 @@
+# Check the ground truth steering angles for a given dataset
+# No model prediction!
+
 import numpy as np
 import scipy.misc, math, numpy as np
 import cv2

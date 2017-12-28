@@ -1,3 +1,5 @@
+# Try the model's hand at a dataset
+
 import numpy as np, os
 import tensorflow as tf
 import scipy.misc, math
