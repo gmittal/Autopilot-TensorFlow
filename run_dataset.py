@@ -1,4 +1,4 @@
-import numpy as np
+import numpy as np, os
 import tensorflow as tf
 import scipy.misc, math
 import model
@@ -27,6 +27,7 @@ saver.restore(sess, "save/model.ckpt")
 img = cv2.imread('steering_wheel_image.jpg',0)
 rows,cols = img.shape
 
+
 data = open("datasets/udacity-TEST/data.txt").read().split('\n')[:-1]
 angles = map(lambda x: float(x.split(' ')[1]), data)
 images = map(lambda x: x.split(' ')[0], data)
@@ -45,10 +46,11 @@ while(cv2.waitKey(10) != ord('q')):
     print("Predicted steering angle: " + str(degrees) + " degrees")
     print("Ground truth steering angle: " + str(angles[i] * -25) + " degrees")
     cv2.imshow("frame", cv2.cvtColor(full_image, cv2.COLOR_RGB2BGR))
+    
     #make smooth angle transitions by turning the steering wheel based on the difference of the current angle
     #and the predicted angle
-    #diff = 0.2 * pow(abs((degrees - smoothed_angle)), 2.0 / 3.0) * (degrees - smoothed_angle) / abs(degrees - smoothed_angle)
-    smoothed_angle = degrees
+    diff = 0.2 * pow(abs((degrees - smoothed_angle)), 2.0 / 3.0) * (degrees - smoothed_angle) / abs(degrees - smoothed_angle)
+    smoothed_angle +=diff
     M = cv2.getRotationMatrix2D((cols/2,rows/2),-smoothed_angle,1)
     dst = cv2.warpAffine(img,M,(cols,rows))
     cv2.imshow("steering wheel", dst)

@@ -1,7 +1,5 @@
 import numpy as np
-import tensorflow as tf
 import scipy.misc, math, numpy as np
-import model
 import cv2
 from subprocess import call
 
@@ -20,10 +18,6 @@ def angle_udacity(val):
         return start
     return norm
 
-sess = tf.InteractiveSession()
-saver = tf.train.Saver()
-saver.restore(sess, "save/model.ckpt")
-
 img = cv2.imread('steering_wheel_image.jpg',0)
 data = open("datasets/udacity-TEST/data.txt").read().split('\n')[:-1]
 angles = map(lambda x: float(x.split(' ')[1]), data)
@@ -40,7 +34,7 @@ while(cv2.waitKey(10) != ord('q')):
     image = scipy.misc.imresize(full_image, [66, 200]) / 255.0
 
     degrees = angle_udacity(angles[i])
-    # degrees = model.y.eval(feed_dict={model.x: [image], model.keep_prob: 1.0})[0][0] * 180.0 / scipy.pi
+
     call("clear")
     print("Predicted steering angle: " + str(degrees) + " degrees")
     cv2.imshow("frame", cv2.cvtColor(full_image, cv2.COLOR_RGB2BGR))
