@@ -5,6 +5,5 @@ logs/
 data/*
 .floydexpt
 .floydignore
-venvd
-datasets/*
+venv
 .DS_Store

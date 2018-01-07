@@ -1,0 +1,2 @@
+# Datasets
+You'll have to download all of these in order to train and test the model. You can download the 6GB of data [here](https://drive.google.com/file/d/1B4k9wPRQIxCCGWMb_6O_v4cNaNqkVlyg/view?usp=sharing).
