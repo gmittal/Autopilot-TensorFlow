@@ -1,5 +1,6 @@
 # Check the ground truth steering angles for a given dataset
 # No model prediction!
+# Golf cart built by Gautam Mittal, Adi Ganapathi, Mihi Juvaddi, and Zach Weiss
 
 import numpy as np
 import scipy.misc, math, numpy as np
